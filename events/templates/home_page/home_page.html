@@ -1,0 +1,174 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing Page</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body class="bg-[#f3f4f6] text-[#1F2937]">
+
+    {% comment %} navbar {% endcomment %}
+     <nav class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16 items-center">
+                <div class="flex">
+                  <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="text-2xl font-bold text-[#4F46E5]">Event Management</a>
+                    </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
+                    <a href="#" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium hover:border-[#4F46E5]">Home</a>
+                    <a href="#" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium hover:border-[#4F46E5]">About</a>
+                    <div class="relative group items-center">
+                        <button class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium hover:border-[#4F46E5] focus:outline-none">
+                            Events
+                            <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                            </svg>
+                        </button>
+                         <div class="absolute mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 hidden group-hover:block">
+                             <div class="py-1" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#E0E7FF] hover:text-[#4F46E5]" role="menuitem">Upcoming Events</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#E0E7FF] hover:text-[#4F46E5]" role="menuitem">Past Events</a>
+                                <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-[#E0E7FF] hover:text-[#4F46E5]" role="menuitem">All Events</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium hover:border-[#4F46E5]">About</a>
+                         </div>
+                        </div>
+                    <div class="hidden sm:ml-6 sm:flex sm:items-center">
+                    <button class="bg-[#4F46E5] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Create Event</button>
+                    <button class="ml-4 bg-[#E0E7FF] text-[#4F46E5] px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-200">Dashboard</button>
+                </div>
+                <div class="-mr-2 flex items-center sm:hidden">
+                <button id="mobile-menu-button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500">
+                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </button>
+             </div>
+            </div>
+            </div>
+            <div id="mobile-menu" class="sm:hidden hidden">
+            <div class="pt-2 pb-3 space-y-1">
+                <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">Home</a>
+                <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">About</a>
+                <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">Events</a>
+                <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">About</a>
+            </div>
+        </div>
+    </nav>
+
+   
+    {% comment %} hero section {% endcomment %}
+    <section class="flex flex-col md:flex-row items-center justify-between py-12 px-4 sm:px-6 lg:px-8 bg-[#f3f4f6]">
+        <div class="md:w-1/2 text-center md:text-left animate-fade-in">
+            <h1 class="text-4xl md:text-5xl font-bold text-[#1F2937] mb-4">Everything You Need to Plan Perfect Events</h1>
+            <p class="text-lg md:text-xl text-gray-700 mb-8">Plan, manage, and execute with ease using our powerful event management system.</p>
+            <div class="flex justify-center md:justify-start space-x-4">
+                <a href="" class="bg-[#4F46E5] hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded transition duration-300 animate-bounce">All Events</a>
+                <a href="" class="bg-[#E0E7FF] hover:bg-indigo-200 text-[#4F46E5] font-bold py-2 px-4 rounded transition duration-300 animate-bounce">Upcoming Events</a>
+            </div>
+        </div>
+        <div class="md:w-1/2 mt-8 md:mt-0 animate-slide-in">
+            <img src="{% static 'image/event.jpg' %}" alt="Event Image" class="w-full h-auto rounded-lg shadow-lg">
+        </div>
+    </section>
+
+    {% comment %} event section {% endcomment %}
+    <section id="events" class="py-8">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800">All of Our Events</h2>
+            <p class="text-gray-600 mt-2">Discover all the amazing events we have to offer</p>
+        </div>
+        <div class="filter-search mb-6 flex justify-between items-center">
+            <input type="text" id="search" placeholder="Search events..." class="border rounded px-4 py-2 w-1/3">
+            <select id="filter" class="border rounded px-4 py-2">
+                <option value="all">All</option>
+                <option value="upcoming">Upcoming</option>
+                <option value="past">Past</option>
+            </select>
+            <button class="bg-[#4F46E5] hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded">Search</button>
+        </div>
+        <div class="events-list grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {% comment %} card start {% endcomment %}
+            <div class="bg-[#E0E7FF] hover:bg-indigo-200 rounded-lg shadow-lg overflow-hidden w-80 transform transition duration-500 hover:scale-105 hover:shadow-2xl">
+        <img src="{% static 'image/event.jpg' %}" alt="Event 1" class="w-full h-48 object-cover">
+        <div class="p-4">
+            <h3 class="text-xl font-bold text-gray-800">Music Concert</h3>
+            <h4 class="text-md text-gray-600">Live Performance</h4>
+            <p class="text-gray-600 font-semibold flex items-center mt-2">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7zM12 11a2 2 0 110-4 2 2 0 010 4z"></path>
+                </svg>
+                New York
+            </p>
+            <p class="text-gray-600 font-semibold flex items-center mt-2">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                </svg>
+                7:00 PM, 25th Dec
+            </p>
+            <p class="text-gray-600 font-semibold mt-2">Category: <span class="text-gray-800">Music</span></p>
+            <p class="text-gray-600 font-semibold mt-2">Participate: <span class="text-gray-800">150</span></p>
+            <p class="text-gray-600 font-semibold mt-2">View Count: <span class="text-gray-800">1200</span></p>
+        </div>
+        <div class="p-4 flex justify-between">
+            <button class="bg-[#4F46E5] text-white hover:text-[#4F46E5] py-2 px-4 rounded hover:bg-indigo-200 transition duration-300 flex items-center">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m0 0l3-3m-3 3l3 3"></path>
+                </svg>
+                View Details
+            </button>
+        </div>
+    </div>
+            {% comment %} card end {% endcomment %}
+        </div>
+    </div>
+   </section>
+
+   {% comment %} footer {% endcomment %}
+   <footer class="bg-gray-800 text-gray-100 py-6 mt-8">
+    <div class="container mx-auto px-4 text-center">
+        <p class="text-gray-400">&copy; 2023 Event Management. All rights reserved.</p>
+        <div class="mt-4">
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300 mx-2">Privacy Policy</a>
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300 mx-2">Terms of Service</a>
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300 mx-2">Contact Us</a>
+        </div>
+        <div class="mt-4 flex justify-center space-x-4">
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                 <path d="M22.675 0h-21.35C.595 0 0 .595 0 1.325v21.351C0 23.405.595 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.325-.595 1.325-1.324V1.325C24 .595 23.405 0 22.675 0z"/>
+                    </svg>
+                </a>
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.724-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.775.418-1.305.76-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.467-2.381 1.235-3.221-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.005-.404 1.022.005 2.048.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.241 2.873.118 3.176.77.84 1.233 1.911 1.233 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+            </a>
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.56v14.88c0 2.52-2.04 4.56-4.56 4.56H4.56C2.04 24 0 21.96 0 19.44V4.56C0 2.04 2.04 0 4.56 0h14.88C21.96 0 24 2.04 24 4.56zM9.6 19.2V9.6H6.72v9.6H9.6zm-1.44-10.8c.96 0 1.68-.72 1.68-1.68 0-.96-.72-1.68-1.68-1.68-.96 0-1.68.72-1.68 1.68 0 .96.72 1.68 1.68 1.68zm12 10.8v-5.28c0-2.88-1.56-4.32-3.6-4.32-1.68 0-2.4.96-2.88 1.68v-1.44H11.52c.048.96 0 9.6 0 9.6h2.88v-5.28c0-.24.024-.48.096-.72.24-.72.84-1.44 1.8-1.44 1.32 0 1.92.96 1.92 2.4v5.04h2.88z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</footer>
+   
+
+    {% comment %} script toggle in mobile {% endcomment %}
+    <script>
+        const menuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+         });
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+    <section id="event-detail" class="py-8 bg-gray-100 text-gray-900">
+    <div class="container mx-auto px-4">
+        <div class="bg-white shadow-md rounded-lg overflow-hidden">
+            <img src="{% static 'image/event.jpg' %}" alt="Event Detail Image" class="w-1/2 h-64 object-cover">
+            <div class="p-6">
+                <h2 class="text-3xl font-bold text-gray-800 mb-4">Event Title</h2>
+                <p class="text-gray-600 mb-4">Event description goes here. It provides a detailed overview of the event, including what to expect, who should attend, and any other relevant information.</p>
+                <div class="flex items-center mb-4">
+                    <svg class="w-6 h-6 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7zM12 11a2 2 0 110-4 2 2 0 010 4z"></path>
+                    </svg>
+                    <span class="text-gray-600">New York</span>
+                </div>
+                <div class="flex items-center mb-4">
+                    <svg class="w-6 h-6 text-gray-600 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                    <span class="text-gray-600">7:00 PM, 25th Dec</span>
+                </div>
+                <p class="text-gray-600 mb-4">Category: <span class="text-gray-800">Music</span></p>
+                <p class="text-gray-600 mb-4">Participants: <span class="text-gray-800">150</span></p>
+                <p class="text-gray-600 mb-4">View Count: <span class="text-gray-800">1200</span></p>
+                <button class="bg-indigo-600 text-white font-bold py-2 px-4 rounded transition duration-300 hover:bg-indigo-700">Register Now</button>
+            </div>
+        </div>
+    </div>
+</section>
+    
+</body>
+</html>
