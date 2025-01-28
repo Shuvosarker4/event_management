@@ -4,17 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-     <link rel="stylesheet" href="{% static 'css/output.css' %}">
+    <title>Create Event</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
-    
 </head>
 <body>
    <div class="w-1/2 mx-auto mt-8">
+    <div class="text-center mb-8">
+            <h2 class="text-3xl font-bold text-gray-800">Create Events</h2>
+            <p class="text-gray-600 mt-2">Before Create Events you need to create Category and Participants first</p>
+            <div class="mt-4">
+                <a href="{% url "home" %}">
+                 <button class="bg-[#E0E7FF] text-indigo-500 px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Home</button>
+                </a>
+                <a href="{% url "create-category" %}">
+                 <button class="bg-[#4F46E5] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Create Category</button>
+                </a>
+                <a href="{% url "create-participant" %}">
+                 <button class="ml-4 bg-[#E0E7FF] text-[#4F46E5] px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-200">Create Participants</button></a>
+                </div>
+        </div>
     <form method="POST">
         {% csrf_token %}
-        
-    <button type="submit" class="bg-rose-600 px-3 py-2 mt-2 rounded-md">Submit</button
+        {{ form.as_p }}
+        <button type="submit" class="bg-indigo-500 text-white px-4 py-2 rounded">Submit</button>
     </form>
    </div>
 </body>

@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from events.models import Event,Participant
+from events.models import Event,Participant 
+from events.forms import EventModelForm,CategoryModelForm,ParticipantModelForm
 from django.db.models import Q
 # Create your views here.
 def home_page(request):
@@ -35,4 +36,17 @@ def details(request,event_id):
 
 
 def create_event(request):
-    return render(request,'create_event/create_event.html')
+    form = EventModelForm()
+    if request.method =="POST":
+        form = EventModelForm(request.POST)
+        print(form.fields)
+    return render(request,'create_event/create_event.html',{"form":form})
+
+def create_category(request):
+    form = CategoryModelForm()
+    return render(request,'create/create_cate.html',{"form":form})
+
+def create_participant(request):
+    form = ParticipantModelForm()
+    return render(request,'create/create_part.html',{"form":form})
+
