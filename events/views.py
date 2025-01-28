@@ -19,7 +19,11 @@ def home_page(request):
     return render(request,'home_page/home_page.html',context)
 
 def dashboard(request):
-    return render(request,'dashboard/dashboard.html')
+    all_events = Event.objects.all()
+    total_event = all_events.count()
+    print()
+    context = {"total_event":total_event}
+    return render(request,'dashboard/dashboard.html',context)
 
 def details(request,event_id):
     event = Event.objects.get(id=event_id)
