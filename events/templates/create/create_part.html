@@ -18,6 +18,21 @@
                  <button class="bg-[#4F46E5] text-white px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-700">Create event now</button>
                 </a>
                 </div>
+                <div>
+    {% if messages %}
+        {% for message in messages %}
+            <p class="
+                {% if message.tags == 'error' %}
+                    text-red-500
+                {% elif message.tags == 'success' %}
+                    text-green-500
+                {% endif %} 
+                text-xl">
+                {{ message }}
+            </p>
+        {% endfor %}
+    {% endif %}
+</div>
         </div>
     <form method="POST">
         {% csrf_token %}
