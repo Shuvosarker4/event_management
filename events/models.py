@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 class Category(models.Model):
@@ -23,3 +24,7 @@ class Event(models.Model):
     participant = models.ManyToManyField(Participant)
     def __str__(self):
         return self.name
+    
+    @staticmethod
+    def get_upcoming_events():
+        return Event.objects.filter(date__gte=timezone.now().date())

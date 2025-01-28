@@ -3,6 +3,8 @@ from events.models import Event,Participant
 from events.forms import EventModelForm,CategoryModelForm,ParticipantModelForm
 from django.db.models import Q
 from django.contrib import messages
+from django.utils import timezone
+
 # Create your views here.
 def home_page(request):
     query = request.GET.get('q')
@@ -19,15 +21,29 @@ def home_page(request):
     return render(request,'home_page/home_page.html',context)
 
 def dashboard(request):
-    type = request.GET.get('total-event')
+    type = request.GET.get('type')
+    upcoming_events_count = Event.get_upcoming_events().count()
+    past_events = Event.objects.filter(date__lt=timezone.now()).count()
+    all_events = Event.objects.select_related('category').prefetch_related('participant').order_by('date')
+
     if type == 'total-event':
-        all_events = Event.objects.all()
-    all_events = Event.objects.all()
+        print(type)
+        all_events = all_events
+    elif type == 'upcoming':
+        print(type)
+        all_events = all_events.filter(date__gte=timezone.now().date())
+    elif type == 'past-event':
+        print(type)
+        all_events = all_events.filter(date__lt=timezone.now().date())
+
     total_event = all_events.count()
     total_participant = Participant.objects.count()
     context = {"total_event":total_event,
                "total_participant":total_participant,
-               "all_events":all_events}
+               "all_events":all_events,
+               "upcoming_events_count":upcoming_events_count,
+               "past_events":past_events
+               }
     return render(request,'dashboard/dashboard.html',context)
 
 def details(request,event_id):
