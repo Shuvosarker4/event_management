@@ -5,12 +5,41 @@ class CategoryModelForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ['name','description']
-
+        labels = {
+            'name': 'Event Name',
+            'description': 'Description',
+        }
+        widgets ={
+            'name': forms.TextInput(attrs={
+                'class': 'p-2 border-blue-500 rounded', 
+                'placeholder': 'Enter Category Name',
+            }),
+            'description': forms.Textarea(attrs={
+                'class': 'p-2 border-blue-500 rounded', 
+                'placeholder': 'Enter Category Description',
+            })
+        }
+        
 
 class ParticipantModelForm(forms.ModelForm):
     class Meta:
         model = Participant
         fields = ['name','email']
+        labels = {
+            'name': 'Participant Name',
+            'email': 'Email Address',
+        }
+        widgets ={
+            'name': forms.TextInput(attrs={
+                'class': 'p-2 border-blue-500 rounded', 
+                'placeholder': 'Enter Participants Name',
+            }),
+            'email': forms.TextInput(attrs={
+                'class': 'p-2',
+                'placeholder': 'Enter Email Address',
+            })
+        }
+       
 
 class EventModelForm(forms.ModelForm):
     class Meta:
