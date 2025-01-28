@@ -74,3 +74,15 @@ def delete_event(request, event_id):
         messages.success(request, 'Event deleted successfully.')
         return redirect('dashboard')
     return redirect('dashboard')
+
+def update_event(request, event_id):
+    event = Event.objects.get(id=event_id)
+    if request.method == 'POST':
+        form = EventModelForm(request.POST, instance=event)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event updated successfully.')
+            return redirect('dashboard')
+    else:
+        form = EventModelForm(instance=event)
+    return render(request, 'create_event/create_event.html', {'form': form})
