@@ -78,7 +78,7 @@ def create_participant(request):
         part_form = ParticipantModelForm(request.POST)
         if part_form.is_valid():
             part_form.save()
-            messages.success(request,"Participants Created Successfully. Now create Events")
+            messages.success(request,"Participants Created Successfully. Now create Events. Okay!")
         else:
             messages.error(request, "Unable to create participant. Please provide unique email")
     return render(request,'create/create_part.html',{"form":form})
