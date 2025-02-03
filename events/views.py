@@ -14,11 +14,11 @@ from django.contrib.auth.decorators import user_passes_test, login_required, per
 def is_admin(user):
     return user.groups.filter(name='Admin').exists()
 
-def is_manager(user):
-    return user.groups.filter(name='Manager').exists()
+def is_organizer(user):
+    return user.groups.filter(name='Organizer').exists()
 
-def is_employee(user):
-    return user.groups.filter(name='Employee').exists()
+def is_participant(user):
+    return user.groups.filter(name='Participant').exists()
 
 
 def home_page(request):
@@ -62,13 +62,16 @@ def dashboard(request):
                }
     return render(request,'dashboard/dashboard.html',context)
 
+@login_required
+@permission_required("events.view_event", login_url='no-permission')
 def details(request,event_id):
     event = Event.objects.get(id=event_id)
     print(event.name)
     return render(request,'details/details.html',{"event":event})
 
 
-@user_passes_test(is_admin, login_url='no-permission')
+@login_required
+@permission_required("events.add_event", login_url='no-permission')
 def create_event(request):
     form = EventModelForm()
     if request.method == "POST":
@@ -80,7 +83,8 @@ def create_event(request):
             messages.error(request, "Unable to create participant. Please provide correct information!")
     return render(request,'create_event/create_event.html',{"form":form})
 
-@user_passes_test(is_admin, login_url='no-permission')
+@login_required
+@permission_required("events.add_category", login_url='no-permission')
 def create_category(request):
     form = CategoryModelForm()
     if request.method == "POST":
@@ -91,20 +95,8 @@ def create_category(request):
     return render(request,'create/create_cate.html',{"form":form})
 
 
-# @user_passes_test(is_admin, login_url='no-permission')
-# def create_participant(request):
-#     form = ParticipantModelForm()
-#     if request.method == "POST":
-#         part_form = ParticipantModelForm(request.POST)
-#         if part_form.is_valid():
-#             part_form.save()
-#             messages.success(request,"Participants Created Successfully. Now create Events. Okay!")
-#         else:
-#             messages.error(request, "Unable to create participant. Please provide unique email")
-#     return render(request,'create/create_part.html',{"form":form})
-
-
-@user_passes_test(is_admin, login_url='no-permission')
+@login_required
+@permission_required("events.delete_event", login_url='no-permission')
 def delete_event(request, event_id):
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
@@ -114,7 +106,8 @@ def delete_event(request, event_id):
     return redirect('dashboard')
 
 
-@user_passes_test(is_admin, login_url='no-permission')
+@login_required
+@permission_required("events.change_category", login_url='no-permission')
 def update_event(request, event_id):
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
@@ -142,6 +135,7 @@ def sign_up(request):
         else:
             print('Form is not valid')
     return render(request,'registration/register.html',{"form":form})
+
 
 def sign_in(request):
     form = LoginForm()
