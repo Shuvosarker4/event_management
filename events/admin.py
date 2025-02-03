@@ -1,7 +1,8 @@
 from django.contrib import admin
-from events.models import Category,Participant,Event
+from events.models import Category,Event
+# from django.contrib.auth.models import User
 
 # Register your models here.
 admin.site.register(Event)
 admin.site.register(Category)
-admin.site.register(Participant)
+# admin.site.register(User)

@@ -1,5 +1,5 @@
 from django import forms
-from events.models import Event,Category,Participant
+from events.models import Event,Category
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User, Permission, Group
 from django import forms
@@ -62,24 +62,24 @@ class CategoryModelForm(forms.ModelForm):
         }
         
 
-class ParticipantModelForm(forms.ModelForm):
-    class Meta:
-        model = Participant
-        fields = ['name','email']
-        labels = {
-            'name': 'Participant Name',
-            'email': 'Email Address',
-        }
-        widgets ={
-            'name': forms.TextInput(attrs={
-                'class': 'p-2 border-blue-500 rounded', 
-                'placeholder': 'Enter Participants Name',
-            }),
-            'email': forms.TextInput(attrs={
-                'class': 'p-2',
-                'placeholder': 'Enter Email Address',
-            })
-        }
+# class ParticipantModelForm(forms.ModelForm):
+#     class Meta:
+#         model = User
+#         fields = ['name','email']
+#         labels = {
+#             'name': 'Participant Name',
+#             'email': 'Email Address',
+#         }
+#         widgets ={
+#             'name': forms.TextInput(attrs={
+#                 'class': 'p-2 border-blue-500 rounded', 
+#                 'placeholder': 'Enter Participants Name',
+#             }),
+#             'email': forms.TextInput(attrs={
+#                 'class': 'p-2',
+#                 'placeholder': 'Enter Email Address',
+#             })
+#         }
        
 
 class EventModelForm(forms.ModelForm):

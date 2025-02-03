@@ -10,18 +10,17 @@
 </head>
 <body class="bg-[#f3f4f6] text-[#1F2937]">
 
-    {% comment %} navbar {% endcomment %}
+  <header>
+      {% comment %} navbar {% endcomment %}
      <nav class="bg-white shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex">
                   <div class="flex-shrink-0 flex items-center">
-                    <a href="#" class="text-2xl font-bold text-[#4F46E5]">Event Management</a>
+                    <a href="{% url 'home' %}" class="text-2xl font-bold text-[#4F46E5]">Event Management</a>
                     </div>
                     <div class="hidden sm:ml-6 sm:flex sm:space-x-8">
-                    <a href="#" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium hover:border-[#4F46E5]">Home</a>
-                    <a href="#" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium hover:border-[#4F46E5]">About</a>
-                    <div class="relative group items-center">
+                    <a href="{% url 'home' %}" class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium hover:border-[#4F46E5]">Home</a>                    <div class="relative group items-center">
                         <button class="text-gray-900 inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm font-medium hover:border-[#4F46E5] focus:outline-none">
                             Events
                             <svg class="ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
@@ -73,9 +72,7 @@
             </div>
             <div id="mobile-menu" class="sm:hidden hidden">
             <div class="pt-2 pb-3 space-y-1">
-                <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">Home</a>
-                <a href="#" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">About</a>
-                <a href="{% url 'dashboard' %}?type=total-event" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">Events</a>
+            <a href="{% url 'home' %}" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">Home</a>                <a href="{% url 'dashboard' %}?type=total-event" class="block pl-3 pr-4 py-2 border-l-4 border-transparent text-base font-medium text-gray-900 hover:border-[#4F46E5]">Events</a>
             </div>
             <div class="mb-2">
                         <a href="{% url "create-event" %}">
@@ -87,8 +84,11 @@
                 </div>
         </div>
     </nav>
+  </header>
 
    
+ <main>
+
     {% comment %} hero section {% endcomment %}
     <section class="flex flex-col md:flex-row items-center justify-between py-12 px-4 sm:px-6 lg:px-8 bg-[#f3f4f6]">
         <div class="md:w-1/2 text-center md:text-left animate-fade-in">
@@ -163,6 +163,7 @@
         </div>
     </div>
    </section>
+ </main>
 
    {% comment %} footer {% endcomment %}
    <footer class="bg-gray-800 text-gray-100 py-6 mt-8">

@@ -62,7 +62,9 @@
                     {% for event in all_events %}
                     <tbody>
                         <tr class="bg-indigo-50 hover:bg-indigo-200">
-                            <td class="py-3 px-4 border-b border-gray-300">{{event.name}}</td>
+                            
+                            <td class="py-3 px-4 border-b border-gray-300"><a href="{% url "event_details" event.id %}">{{event.name}}</a></td>
+                            
                             <td class="py-3 px-4 border-b border-gray-300">{{event.category.name}}</td>
                             <td class="py-3 px-4 border-b border-gray-300">{{event.date}}</td>
                             <td class="py-3 px-4 border-b border-gray-300">{{event.location}}</td>
@@ -95,6 +97,34 @@
             </div>
         </div>
     </div>
+
+    <footer class="bg-gray-800 text-gray-100 py-6 mt-8">
+    <div class="container mx-auto px-4 text-center">
+        <p class="text-gray-400">&copy; 2023 Event Management. All rights reserved.</p>
+        <div class="mt-4">
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300 mx-2">Privacy Policy</a>
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300 mx-2">Terms of Service</a>
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300 mx-2">Contact Us</a>
+        </div>
+        <div class="mt-4 flex justify-center space-x-4">
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                 <path d="M22.675 0h-21.35C.595 0 0 .595 0 1.325v21.351C0 23.405.595 24 1.325 24h11.495v-9.294H9.691v-3.622h3.129V8.413c0-3.1 1.894-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.794.715-1.794 1.763v2.31h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.325-.595 1.325-1.324V1.325C24 .595 23.405 0 22.675 0z"/>
+                    </svg>
+                </a>
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300">
+                    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.387.6.113.82-.258.82-.577v-2.234c-3.338.724-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.757-1.333-1.757-1.089-.744.083-.729.083-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.775.418-1.305.76-1.605-2.665-.305-5.466-1.334-5.466-5.931 0-1.31.467-2.381 1.235-3.221-.123-.303-.535-1.523.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.005-.404 1.022.005 2.048.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.241 2.873.118 3.176.77.84 1.233 1.911 1.233 3.221 0 4.609-2.803 5.624-5.475 5.921.43.371.823 1.102.823 2.222v3.293c0 .322.218.694.825.576C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                    </svg>
+            </a>
+            <a href="#" class="text-indigo-400 hover:text-indigo-600 transition duration-300">
+                <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M24 4.56v14.88c0 2.52-2.04 4.56-4.56 4.56H4.56C2.04 24 0 21.96 0 19.44V4.56C0 2.04 2.04 0 4.56 0h14.88C21.96 0 24 2.04 24 4.56zM9.6 19.2V9.6H6.72v9.6H9.6zm-1.44-10.8c.96 0 1.68-.72 1.68-1.68 0-.96-.72-1.68-1.68-1.68-.96 0-1.68.72-1.68 1.68 0 .96.72 1.68 1.68 1.68zm12 10.8v-5.28c0-2.88-1.56-4.32-3.6-4.32-1.68 0-2.4.96-2.88 1.68v-1.44H11.52c.048.96 0 9.6 0 9.6h2.88v-5.28c0-.24.024-.48.096-.72.24-.72.84-1.44 1.8-1.44 1.32 0 1.92.96 1.92 2.4v5.04h2.88z"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</footer>
 
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>   
