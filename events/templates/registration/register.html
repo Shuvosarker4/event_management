@@ -1,0 +1,41 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body>
+    <div class="w-1/2 mx-auto mt-8">
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="text-white bg-green-400 p-2">{{message}}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <form action="" method ="POST">
+            {% csrf_token %}
+            {% for field in form %}
+            <p>
+                <label class="" for="{{field.id_for_label}}">
+                    {{field.label}}
+                </label>
+                {{field}}
+                {% if field.errors %}
+                <ul>
+                    {% for error in field.errors %}
+                        <li class="text-red-500">{{error}}</li>
+                    {% endfor %}
+                </ul>
+                
+                {% endif %}
+            </p>
+            {% endfor %}
+            <button type="submit" class="py-2 px-6 text-white bg-red-400 rounded" >Sign Up</button>
+        </form>
+    </div>
+</body>
+</html>

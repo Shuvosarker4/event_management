@@ -1,0 +1,25 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="{% static 'css/output.css' %}">
+</head>
+<body>
+    <div class="w-1/2 mx-auto mt-8">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="bg-green-400 p-4 text-white" >{{message}}</p>
+            {% endfor %}
+        {% endif %}
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit" class="px-6 py-2 bg-red-400 text-white rounded">Log In</button>
+        </form>
+    </div>
+    
+</body>
+</html>

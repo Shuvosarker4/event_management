@@ -1,13 +1,16 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,HttpResponse
 from events.models import Event,Participant 
-from events.forms import EventModelForm,CategoryModelForm,ParticipantModelForm
+from events.forms import EventModelForm,CategoryModelForm,ParticipantModelForm,CustomRegisterForm,LoginForm
 from django.db.models import Q
 from django.contrib import messages
 from django.utils import timezone
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.models import User
+from django.contrib.auth.tokens import default_token_generator
 
 # Create your views here.
 def home_page(request):
-    query = request.GET.get('q')
+    query = request.GET.get('q','')
     if query:
         all_events = Event.objects.filter(
             Q(name__icontains=query) |
@@ -102,3 +105,47 @@ def update_event(request, event_id):
     else:
         form = EventModelForm(instance=event)
     return render(request, 'create_event/create_event.html', {'form': form})
+
+def sign_up(request):
+    form =CustomRegisterForm()
+    if request.method == "POST":
+        form = CustomRegisterForm(request.POST)
+        if form.is_valid():
+            user=form.save(commit=False)
+            user.set_password(form.cleaned_data.get('password'))
+            user.is_active = False
+            user.save()
+            messages.success(request,"A confirmation mail has been send on your mail.please check!")
+            return redirect('sign-in')
+        else:
+            print('Form is not valid')
+    return render(request,'registration/register.html',{"form":form})
+
+def sign_in(request):
+    form = LoginForm()
+    if request.method == 'POST':
+        form = LoginForm(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request,user)
+            return redirect('home')
+    return render(request,'registration/login.html',{'form':form})
+
+
+def sign_out(request):
+    if request.method == 'POST':
+        logout(request)
+        return redirect('home')
+    
+def activate_user(request,event_id,token): 
+    try:
+        user = User.objects.get(id=event_id)
+        if default_token_generator.check_token(user,token):
+            user.is_active =True
+            user.save()
+            messages.success(request,'You are verified,please login now!')
+            return redirect('sign-in')
+        else:
+            return HttpResponse('Invalid Id')
+    except User.DoesNotExist:
+        return HttpResponse('User Not Found')
