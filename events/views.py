@@ -72,7 +72,7 @@ def details(request,event_id):
 def create_event(request):
     form = EventModelForm()
     if request.method == "POST":
-        event_form = EventModelForm(request.POST)
+        event_form = EventModelForm(request.POST,request.FILES)
         if event_form.is_valid():
             event_form.save()
             messages.success(request,"Events Created Successfully!!")
@@ -118,7 +118,7 @@ def delete_event(request, event_id):
 def update_event(request, event_id):
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
-        form = EventModelForm(request.POST, instance=event)
+        form = EventModelForm(request.POST, request.FILES, instance=event,)
         if form.is_valid():
             form.save()
             messages.success(request, 'Event updated successfully.')

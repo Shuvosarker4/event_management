@@ -18,6 +18,7 @@ class Event(models.Model):
     category = models.ForeignKey(Category,on_delete=models.CASCADE,default=1)
     # participant = models.ManyToManyField(Participant)
     participant = models.ManyToManyField(User)
+    asset = models.ImageField(upload_to='events_asset',blank=True,null=True,default='events_asset/default.jpg')
     def __str__(self):
         return self.name
     

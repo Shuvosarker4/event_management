@@ -85,7 +85,7 @@ class CategoryModelForm(forms.ModelForm):
 class EventModelForm(forms.ModelForm):
     class Meta:
         model = Event
-        fields=['name','description','date','time','location','category','participant']
+        fields=['name','description','date','time','location','category','asset','participant']
         labels = {
             'name': 'Event Name',
             'description': 'Description',
@@ -94,6 +94,7 @@ class EventModelForm(forms.ModelForm):
             'location': 'Location',
             'category': 'Category',
             'participant': 'Participants',
+            'Asset': 'asset',
         }
         widgets = {
             'name': forms.TextInput(attrs={
@@ -118,11 +119,12 @@ class EventModelForm(forms.ModelForm):
                 'placeholder': 'Enter Event Location',
             }),
             'category': forms.Select(attrs={
-                'class': 'form-select',
+                'class': 'form-select py-2',
             }),
             'participant': forms.CheckboxSelectMultiple(attrs={
-                'class': 'form-control',
+                'class': 'form-control py-2',
             }),
+            
         }
 
 
