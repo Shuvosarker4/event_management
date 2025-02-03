@@ -1,0 +1,61 @@
+<div class="container mx-auto p-6">
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
+      <thead class="bg-indigo-200">
+        <tr>
+          <th class="px-4 py-3 text-left text-xs font-medium text-[#4F46E5] uppercase tracking-wider">
+            Number
+          </th>
+          <th class="px-4 py-3 text-left text-xs font-medium text-[#4F46E5] uppercase tracking-wider">
+            Username
+          </th>
+          <th class="px-4 py-3 text-left text-xs font-medium text-[#4F46E5] uppercase tracking-wider">
+            Email
+          </th>
+          <th class="px-4 py-3 text-left text-xs font-medium text-[#4F46E5] uppercase tracking-wider">
+            User ID
+          </th>
+          <th class="px-4 py-3 text-left text-xs font-medium text-[#4F46E5] uppercase tracking-wider">
+            Current Role
+          </th>
+          <th class="px-4 py-3 text-left text-xs font-medium text-[#4F46E5] uppercase tracking-wider">
+            Action
+          </th>
+        </tr>
+      </thead>
+      <tbody class="divide-y divide-gray-300 bg-indigo-50">
+        <!-- Example static data -->
+        <tr class="hover:bg-indigo-200">
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">1</td>
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">John Doe</td>
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">johndoe@example.com</td>
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">12345</td>
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">Admin</td>
+          <td class="px-4 py-4 whitespace-nowrap">
+            <a
+              href="{% url 'assign-role' %}"
+              class="bg-[#4F46E5] hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Change Role
+            </a>
+          </td>
+        </tr>
+        <tr class="hover:bg-indigo-200">
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">2</td>
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">Jane Smith</td>
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">janesmith@example.com</td>
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">67890</td>
+          <td class="px-4 py-4 whitespace-nowrap text-gray-800">Editor</td>
+          <td class="px-4 py-4 whitespace-nowrap">
+            <a
+              href="assign-role.html?id=67890"
+              class="bg-[#4F46E5] hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Change Role
+            </a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

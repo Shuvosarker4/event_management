@@ -1,14 +1,25 @@
 from django.shortcuts import render,redirect,HttpResponse
 from events.models import Event,Participant 
-from events.forms import EventModelForm,CategoryModelForm,ParticipantModelForm,CustomRegisterForm,LoginForm
+from events.forms import EventModelForm,CategoryModelForm,ParticipantModelForm,CustomRegisterForm,LoginForm,AssignRoleForm,CreateGroupForm
 from django.db.models import Q
 from django.contrib import messages
 from django.utils import timezone
-from django.contrib.auth import authenticate,login,logout
-from django.contrib.auth.models import User
+from django.contrib.auth import login,logout
+from django.contrib.auth.models import User,Group
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
 
 # Create your views here.
+def is_admin(user):
+    return user.groups.filter(name='Admin').exists()
+
+def is_manager(user):
+    return user.groups.filter(name='Manager').exists()
+
+def is_employee(user):
+    return user.groups.filter(name='Employee').exists()
+
+
 def home_page(request):
     query = request.GET.get('q','')
     if query:
@@ -23,6 +34,8 @@ def home_page(request):
     context = {"events":all_events,"query": query}
     return render(request,'home_page/home_page.html',context)
 
+@login_required
+@permission_required("events.add_task", login_url='no-permission')
 def dashboard(request):
     type = request.GET.get('type')
     upcoming_events_count = Event.get_upcoming_events().count()
@@ -55,6 +68,8 @@ def details(request,event_id):
     return render(request,'details/details.html',{"event":event})
 
 
+@login_required
+@permission_required("events.add_task", login_url='no-permission')
 def create_event(request):
     form = EventModelForm()
     if request.method == "POST":
@@ -66,6 +81,8 @@ def create_event(request):
             messages.error(request, "Unable to create participant. Please provide correct information!")
     return render(request,'create_event/create_event.html',{"form":form})
 
+@login_required
+@permission_required("events.add_task", login_url='no-permission')
 def create_category(request):
     form = CategoryModelForm()
     if request.method == "POST":
@@ -75,6 +92,9 @@ def create_category(request):
             messages.success(request,"Category Created Successfully.Now create Participants")
     return render(request,'create/create_cate.html',{"form":form})
 
+
+@login_required
+@permission_required("events.delete_task", login_url='no-permission')
 def create_participant(request):
     form = ParticipantModelForm()
     if request.method == "POST":
@@ -86,6 +106,9 @@ def create_participant(request):
             messages.error(request, "Unable to create participant. Please provide unique email")
     return render(request,'create/create_part.html',{"form":form})
 
+
+@login_required
+@permission_required("events.add_task", login_url='no-permission')
 def delete_event(request, event_id):
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
@@ -94,6 +117,9 @@ def delete_event(request, event_id):
         return redirect('dashboard')
     return redirect('dashboard')
 
+
+@login_required
+@permission_required("events.change_task", login_url='no-permission')
 def update_event(request, event_id):
     event = Event.objects.get(id=event_id)
     if request.method == 'POST':
@@ -105,6 +131,7 @@ def update_event(request, event_id):
     else:
         form = EventModelForm(instance=event)
     return render(request, 'create_event/create_event.html', {'form': form})
+
 
 def sign_up(request):
     form =CustomRegisterForm()
@@ -132,6 +159,7 @@ def sign_in(request):
     return render(request,'registration/login.html',{'form':form})
 
 
+@login_required
 def sign_out(request):
     if request.method == 'POST':
         logout(request)
@@ -149,3 +177,31 @@ def activate_user(request,event_id,token):
             return HttpResponse('Invalid Id')
     except User.DoesNotExist:
         return HttpResponse('User Not Found')
+
+@login_required
+@permission_required("events.add_task", login_url='no-permission')
+def admin_dashboard(request):
+    users = User.objects.all()
+    return render(request, 'admin/dashboard.html', {"users": users})
+
+@login_required
+@permission_required("events.add_task", login_url='no-permission')
+def assign_role(request):
+    # user = User.objects.get(id=user_id)
+    form = AssignRoleForm()
+    return render(request, 'admin/assign_role.html', {"form": form})
+
+@login_required
+@permission_required("events.add_task", login_url='no-permission')
+def create_group(request):
+    form = CreateGroupForm()
+    return render(request, 'admin/create_group.html', {'form': form})
+
+@login_required
+@permission_required("events.add_task", login_url='no-permission')
+def group_list(request):
+    groups = Group.objects.prefetch_related('permissions').all()
+    return render(request, 'admin/group_list.html', {'groups': groups})
+
+def no_permission(request):
+    return HttpResponse('You have no permission to access this page')

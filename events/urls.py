@@ -1,5 +1,5 @@
 from django.urls import path
-from events.views import home_page,dashboard,details,create_event,create_category,create_participant,delete_event,update_event,sign_up,sign_in,sign_out,activate_user
+from events.views import home_page,dashboard,details,create_event,create_category,create_participant,delete_event,update_event,sign_up,sign_in,sign_out,activate_user,admin_dashboard,assign_role,create_group,group_list,no_permission
 
 urlpatterns = [
     path('home-page/', home_page,name="home"),
@@ -14,4 +14,9 @@ urlpatterns = [
     path('sign-in/', sign_in,name='sign-in'),
     path('sign-out/', sign_out,name='sign-out'),
     path('activate/<int:event_id>/<str:token>/',activate_user,name='activate-user'),
+    path('admin/dashboard/', admin_dashboard, name='admin-dashboard'),
+    path('admin/assign-role/', assign_role, name='assign-role'),
+    path('admin/create-group/', create_group, name='create-group'),
+    path('admin/group-list/', group_list, name='group-list'),
+    path('no-permission/', no_permission, name='no-permission'),
 ]
