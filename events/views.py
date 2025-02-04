@@ -1,7 +1,9 @@
 from django.shortcuts import render,redirect,HttpResponse
-from events.models import Event 
+from events.models import Event,RSVP
 from events.forms import EventModelForm,CategoryModelForm,CustomRegisterForm,LoginForm,AssignRoleForm,CreateGroupForm
 from django.db.models import Q
+from django.conf import settings
+from django.core.mail import send_mail
 from django.contrib import messages
 from django.utils import timezone
 from django.contrib.auth import login,logout
@@ -217,3 +219,18 @@ def group_list(request):
 
 def no_permission(request):
     return HttpResponse('You have no permission to access this page')
+
+
+@login_required
+def rsvp_event(request, event_id):
+    event = Event.objects.get(id=event_id)
+    user = request.user
+    try:
+        rsvp = RSVP.objects.get(event=event, user=user)
+        print(rsvp.user)
+        messages.info(request, "You have already RSVP'd for this event.")
+    except RSVP.DoesNotExist:
+        rsvp = RSVP.objects.create(event=event, user=user)
+        messages.success(request, "You have successfully RSVP'd for this event.")
+    return redirect('home')
+
