@@ -1,5 +1,5 @@
-from django.shortcuts import render,redirect,HttpResponse
-from events.models import Event,RSVP
+from django.shortcuts import render,redirect,HttpResponse,get_object_or_404
+from events.models import Event
 from events.forms import EventModelForm,CategoryModelForm,CustomRegisterForm,LoginForm,AssignRoleForm,CreateGroupForm
 from django.db.models import Q
 from django.contrib import messages
@@ -217,16 +217,10 @@ def no_permission(request):
     return HttpResponse('You have no permission to access this page')
 
 
-@login_required
-def rsvp_event(request, event_id):
-    event = Event.objects.get(id=event_id)
-    user = request.user
-    try:
-        rsvp = RSVP.objects.get(event=event, user=user)
-        print(rsvp.user)
-        messages.info(request, "You have already RSVP'd for this event.")
-    except RSVP.DoesNotExist:
-        rsvp = RSVP.objects.create(event=event, user=user)
-        messages.success(request, "You have successfully RSVP'd for this event.")
-    return redirect('home')
 
+def rsvp_event(request,event_id):
+    event = get_object_or_404(Event, id=event_id)
+    if request.user not in event.participant.all():
+        event.participant.add(request.user)
+        return redirect('home')
+    return messages.error(request,"Already RSVP'd")

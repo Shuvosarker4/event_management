@@ -18,5 +18,5 @@ urlpatterns = [
     path('admin/create-group/', create_group, name='create-group'),
     path('admin/group-list/', group_list, name='group-list'),
     path('no-permission/', no_permission, name='no-permission'),
-    path('event/<int:event_id>/rsvp/', rsvp_event, name='rsvp_event'),
+    path('rsvp-event/<int:event_id>/',rsvp_event, name="rsvp-event"),
 ]

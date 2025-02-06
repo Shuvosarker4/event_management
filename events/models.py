@@ -16,7 +16,7 @@ class Event(models.Model):
     time = models.TimeField()
     location = models.CharField(max_length=200)
     category = models.ForeignKey(Category,on_delete=models.CASCADE,default=1)
-    participant = models.ManyToManyField(User)
+    participant = models.ManyToManyField(User,related_name='rsvp_event', blank=True)
     asset = models.ImageField(upload_to='events_asset',blank=True,null=True,default='events_asset/default.jpg')
     def __str__(self):
         return self.name
@@ -24,13 +24,4 @@ class Event(models.Model):
     @staticmethod
     def get_upcoming_events():
         return Event.objects.filter(date__gte=timezone.now().date())
-
-class RSVP(models.Model):
-    event = models.ForeignKey(Event, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE) 
-
-    class Meta:
-        unique_together = ('event', 'user')
-
-    def __str__(self):
-        return f"{self.user.username} - {self.event.name}" 
+ 
