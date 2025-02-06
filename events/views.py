@@ -62,8 +62,7 @@ def dashboard(request):
                }
     return render(request,'dashboard/dashboard.html',context)
 
-@login_required
-@permission_required("events.view_event", login_url='no-permission')
+
 def details(request,event_id):
     event = Event.objects.get(id=event_id)
     print(event.name)
