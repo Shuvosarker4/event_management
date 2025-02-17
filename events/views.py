@@ -9,7 +9,7 @@ from django.contrib.auth.models import User,Group
 from django.contrib.auth.tokens import default_token_generator
 from django.db.models import Prefetch
 from django.views import View
-from django.views.generic import DetailView
+from django.utils.decorators import method_decorator
 
 from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
 
@@ -96,7 +96,9 @@ def create_event(request):
             messages.error(request, "Unable to create participant. Please provide correct information!")
     return render(request,'create_event/create_event.html',{"form":form})
 
-
+ # create event with ccb
+create_decorators = [login_required,permission_required("events.add_event", login_url='no-permission')]
+@method_decorator(create_decorators, name='dispatch')
 class CreateEvent(View):
     form_class = EventModelForm
     template_name = "create_event/create_event.html"
