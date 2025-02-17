@@ -97,8 +97,8 @@ def create_event(request):
     return render(request,'create_event/create_event.html',{"form":form})
 
  # create event with ccb
-create_decorators = [login_required,permission_required("events.add_event", login_url='no-permission')]
-@method_decorator(create_decorators, name='dispatch')
+create_event_decorators = [login_required,permission_required("events.add_event", login_url='no-permission')]
+@method_decorator(create_event_decorators, name='dispatch')
 class CreateEvent(View):
     form_class = EventModelForm
     template_name = "create_event/create_event.html"
@@ -127,6 +127,24 @@ def create_category(request):
             messages.success(request,"Category Created Successfully.Now create Participants")
     return render(request,'create/create_cate.html',{"form":form})
 
+add_cate_decorators = [login_required,permission_required("events.add_category", login_url='no-permission')]
+@method_decorator(add_cate_decorators, name='dispatch')
+class CreateCategory(View):
+    form_class = CategoryModelForm
+    template_name = "create/create_cate.html"
+
+    def get(self,request,*args, **kwargs):
+        form = self.form_class()
+        return render(request,self.template_name,{"form":form})
+    
+    def post(self,request,*args, **kwargs):
+        cate_form = self.form_class(request.POST)
+        if cate_form.is_valid():
+            cate_form.save()
+            messages.success(request,"Category Created Successfully.Now create Participants")
+            return redirect('create-category')
+        else:
+            messages.error(request, "Unable to create Category. Please provide correct information!")
 
 @login_required
 @permission_required("events.delete_event", login_url='no-permission')
