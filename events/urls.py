@@ -1,11 +1,13 @@
 from django.urls import path
-from events.views import home_page,dashboard,details,create_event,create_category,delete_event,update_event,sign_up,sign_in,sign_out,activate_user,admin_dashboard,assign_role,create_group,group_list,no_permission,rsvp_event
+from events.views import home_page,dashboard,details,create_event,create_category,delete_event,update_event,sign_up,sign_in,sign_out,activate_user,admin_dashboard,assign_role,create_group,group_list,no_permission,rsvp_event,CreateEvent
 
 urlpatterns = [
     path('home-page/', home_page,name="home"),
     path('dashboard/', dashboard,name="dashboard"),
+    # path('details/<int:event_id>/', DetailView.as_view(),name='event_details'),
     path('details/<int:event_id>/', details,name='event_details'),
-    path('create-event/', create_event,name="create-event"),
+    # path('create-event/', create_event,name="create-event"),
+    path('create-event/', CreateEvent.as_view(),name="create-event"),
     path('create-category/', create_category,name="create-category"),
     path('delete_event/<int:event_id>/', delete_event, name='delete_event'),
     path('update_event/<int:event_id>/', update_event, name='update_event'),

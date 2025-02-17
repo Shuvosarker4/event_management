@@ -8,6 +8,9 @@ from django.contrib.auth import login,logout
 from django.contrib.auth.models import User,Group
 from django.contrib.auth.tokens import default_token_generator
 from django.db.models import Prefetch
+from django.views import View
+from django.views.generic import DetailView
+
 from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
 
 # Create your views here.
@@ -65,9 +68,20 @@ def dashboard(request):
 
 def details(request,event_id):
     event = Event.objects.get(id=event_id)
-    print(event.name)
     return render(request,'details/details.html',{"event":event})
 
+# class Details(DetailView):
+#     model = Event
+#     template_name = 'details/details.html'
+#     pk_url_kwarg = 'event_id'
+#     context_object_name = 'event'
+
+#     def get_queryset(self):
+#         return Event.objects.all()
+
+#     def get_context_data(self, **kwargs):
+#         context= super().get_context_data(**kwargs)
+#         return context
 
 @login_required
 @permission_required("events.add_event", login_url='no-permission')
@@ -81,6 +95,24 @@ def create_event(request):
         else:
             messages.error(request, "Unable to create participant. Please provide correct information!")
     return render(request,'create_event/create_event.html',{"form":form})
+
+
+class CreateEvent(View):
+    form_class = EventModelForm
+    template_name = "create_event/create_event.html"
+
+    def get(self,request,*args, **kwargs):
+        form = self.form_class()
+        return render(request,self.template_name,{"form":form})
+    
+    def post(self,request,*args, **kwargs):
+        event_form = self.form_class(request.POST,request.FILES)
+        if event_form.is_valid():
+            event_form.save()
+            messages.success(request,"Events Created Successfully!!")
+            return redirect('create-event')
+        else:
+            messages.error(request, "Unable to create participant. Please provide correct information!")
 
 @login_required
 @permission_required("events.add_category", login_url='no-permission')

@@ -85,22 +85,22 @@ WSGI_APPLICATION = 'event_management.wsgi.application'
 # }
 
 # Replace the SQLite DATABASES configuration with PostgreSQL:
-DATABASES = {
-    'default': dj_database_url.config(
-        default='postgresql://event_management_db_uiik_user:NTAATA2pU80xVTi3K71wCMiAIyCaGRhB@dpg-cucd0hdds78s73c1p5pg-a.oregon-postgres.render.com/event_management_db_uiik',
-        conn_max_age=600
-        )}
-
 # DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': config('DB_NAME'),
-#         'USER': config('DB_USER'),
-#         'PASSWORD': config('DB_PASSWORD'),
-#         'HOST': config('DB_HOST'),
-#         'PORT': config('DB_PORT')
-#     }
-# }
+#     'default': dj_database_url.config(
+#         default='postgresql://event_management_db_uiik_user:NTAATA2pU80xVTi3K71wCMiAIyCaGRhB@dpg-cucd0hdds78s73c1p5pg-a.oregon-postgres.render.com/event_management_db_uiik',
+#         conn_max_age=600
+#         )}
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': config('DB_NAME'),
+        'USER': config('DB_USER'),
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': config('DB_HOST'),
+        'PORT': config('DB_PORT')
+    }
+}
 
 
 # Password validation
@@ -160,4 +160,4 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
 
 
 FRONTEND_URL = 'http://127.0.0.1:8000'
-LOGIN_URL = 'sign-in'
+LOGIN_URL = '/sign-in/'
