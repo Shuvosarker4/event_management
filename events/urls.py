@@ -1,5 +1,5 @@
 from django.urls import path
-from events.views import home_page,dashboard,details,create_event,create_category,delete_event,update_event,sign_up,sign_in,sign_out,activate_user,admin_dashboard,assign_role,create_group,group_list,no_permission,rsvp_event,CreateEvent,CreateCategory
+from events.views import home_page,dashboard,details,create_event,create_category,delete_event,update_event,sign_up,sign_in,sign_out,activate_user,admin_dashboard,assign_role,create_group,group_list,no_permission,rsvp_event,CreateEvent,CreateCategory,UpdateEvent,DeleteEvent
 
 urlpatterns = [
     path('home-page/', home_page,name="home"),
@@ -10,8 +10,10 @@ urlpatterns = [
     path('create-event/', CreateEvent.as_view(),name="create-event"),
     path('create-category/', CreateCategory.as_view(),name="create-category"),
     # path('create-category/', create_category,name="create-category"),
-    path('delete_event/<int:event_id>/', delete_event, name='delete_event'),
-    path('update_event/<int:event_id>/', update_event, name='update_event'),
+    path('delete_event/<int:event_id>/', DeleteEvent.as_view(), name='delete_event'),
+    # path('delete_event/<int:event_id>/', delete_event, name='delete_event'),
+    # path('update_event/<int:event_id>/', update_event, name='update_event'),
+    path('update_event/<int:event_id>/', UpdateEvent.as_view(), name='update_event'),
     path('sign_up/',sign_up,name="sign-up"),
     path('sign-in/', sign_in,name='sign-in'),
     path('sign-out/', sign_out,name='sign-out'),

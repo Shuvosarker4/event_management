@@ -9,6 +9,7 @@ from django.contrib.auth.models import User,Group
 from django.contrib.auth.tokens import default_token_generator
 from django.db.models import Prefetch
 from django.views import View
+from django.views.generic import UpdateView,DeleteView
 from django.utils.decorators import method_decorator
 
 from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
@@ -69,19 +70,7 @@ def dashboard(request):
 def details(request,event_id):
     event = Event.objects.get(id=event_id)
     return render(request,'details/details.html',{"event":event})
-
-# class Details(DetailView):
-#     model = Event
-#     template_name = 'details/details.html'
-#     pk_url_kwarg = 'event_id'
-#     context_object_name = 'event'
-
-#     def get_queryset(self):
-#         return Event.objects.all()
-
-#     def get_context_data(self, **kwargs):
-#         context= super().get_context_data(**kwargs)
-#         return context
+     
 
 @login_required
 @permission_required("events.add_event", login_url='no-permission')
@@ -95,6 +84,7 @@ def create_event(request):
         else:
             messages.error(request, "Unable to create participant. Please provide correct information!")
     return render(request,'create_event/create_event.html',{"form":form})
+
 
  # create event with ccb
 create_event_decorators = [login_required,permission_required("events.add_event", login_url='no-permission')]
@@ -127,6 +117,8 @@ def create_category(request):
             messages.success(request,"Category Created Successfully.Now create Participants")
     return render(request,'create/create_cate.html',{"form":form})
 
+
+ # create category with ccb
 add_cate_decorators = [login_required,permission_required("events.add_category", login_url='no-permission')]
 @method_decorator(add_cate_decorators, name='dispatch')
 class CreateCategory(View):
@@ -157,6 +149,21 @@ def delete_event(request, event_id):
     return redirect('dashboard')
 
 
+# delete event with ccb
+delete_event_decorators = [login_required,permission_required("events.delete_event", login_url='no-permission')]
+@method_decorator(delete_event_decorators, name='dispatch')
+class DeleteEvent(DeleteView):
+    model = Event
+    pk_url_kwarg = "event_id"
+
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        self.object.delete()
+        messages.success(request, 'Event deleted successfully.')
+        return redirect('dashboard')
+
+
+
 @login_required
 @permission_required("events.change_category", login_url='no-permission')
 def update_event(request, event_id):
@@ -170,6 +177,29 @@ def update_event(request, event_id):
     else:
         form = EventModelForm(instance=event)
     return render(request, 'create_event/create_event.html', {'form': form})
+
+# update event with ccb
+change_update_decorators = [login_required,permission_required("events.change_category", login_url='no-permission')]
+@method_decorator(change_update_decorators, name='dispatch')
+class UpdateEvent(UpdateView):
+    model = Event
+    form_class = EventModelForm
+    template_name = "create_event/create_event.html"
+    context_object_name = "form"
+    pk_url_kwarg = "event_id"
+
+    def get_context_data(self, **kwargs):
+        return super().get_context_data(**kwargs)
+    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        form = self.form_class(request.POST, request.FILES, instance=self.object)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Event updated successfully.')
+            # return redirect('update_event',self.object.id)
+        return redirect("dashboard")
+    
 
 
 def sign_up(request):
