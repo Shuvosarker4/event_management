@@ -1,10 +1,9 @@
 from django.urls import path
-from events.views import home_page,dashboard,details,create_event,create_category,delete_event,update_event,sign_up,sign_in,sign_out,activate_user,admin_dashboard,assign_role,create_group,group_list,no_permission,rsvp_event,CreateEvent,CreateCategory,UpdateEvent,DeleteEvent
+from events.views import home_page,dashboard,details,create_event,create_category,delete_event,update_event,sign_up,sign_in,sign_out,activate_user,admin_dashboard,assign_role,create_group,group_list,no_permission,rsvp_event,CreateEvent,CreateCategory,UpdateEvent,DeleteEvent,SignIn
 
 urlpatterns = [
     path('home-page/', home_page,name="home"),
     path('dashboard/', dashboard,name="dashboard"),
-    # path('details/<int:event_id>/', DetailView.as_view(),name='event_details'),
     path('details/<int:event_id>/', details,name='event_details'),
     # path('create-event/', create_event,name="create-event"),
     path('create-event/', CreateEvent.as_view(),name="create-event"),
@@ -15,7 +14,8 @@ urlpatterns = [
     # path('update_event/<int:event_id>/', update_event, name='update_event'),
     path('update_event/<int:event_id>/', UpdateEvent.as_view(), name='update_event'),
     path('sign_up/',sign_up,name="sign-up"),
-    path('sign-in/', sign_in,name='sign-in'),
+    path('sign-in/', SignIn.as_view(),name='sign-in'),
+    # path('sign-in/', sign_in,name='sign-in'),
     path('sign-out/', sign_out,name='sign-out'),
     path('activate/<int:event_id>/<str:token>/',activate_user,name='activate-user'),
     path('admin/dashboard/', admin_dashboard, name='admin-dashboard'),

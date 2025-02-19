@@ -11,6 +11,8 @@ from django.db.models import Prefetch
 from django.views import View
 from django.views.generic import UpdateView,DeleteView
 from django.utils.decorators import method_decorator
+from django.contrib.auth.views import LoginView
+
 
 from django.contrib.auth.decorators import user_passes_test, login_required, permission_required
 
@@ -227,6 +229,22 @@ def sign_in(request):
             login(request,user)
             return redirect('home')
     return render(request,'registration/login.html',{'form':form})
+
+# sign in with ccb
+
+class SignIn(LoginView):
+    form_class = LoginForm
+    template_name = "registration/login.html"
+    context_object_name = "form"
+
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request,user)
+            return redirect('home')
+        return render(request,self.template_name,{'form':form})
+    
 
 
 @login_required
