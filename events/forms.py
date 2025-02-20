@@ -1,6 +1,6 @@
 from django import forms
 from events.models import Event,Category
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,PasswordResetForm,SetPasswordForm
 from django.contrib.auth.models import User, Permission, Group
 from django import forms
 import re
@@ -129,7 +129,6 @@ class EventModelForm(forms.ModelForm):
 
 
 
-
 class CustomRegisterForm(StyleFormMixin,forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput)
     confirm_password = forms.CharField(widget=forms.PasswordInput)
@@ -182,3 +181,11 @@ class CreateGroupForm(StyleFormMixin, forms.ModelForm):
     class Meta:
         model = Group
         fields = ['name', 'permissions']
+
+
+class CustomPasswordResetForm(StyleFormMixin, PasswordResetForm):
+    pass
+
+
+class CustomPasswordResetConfirmForm(StyleFormMixin, SetPasswordForm):
+    pass

@@ -50,6 +50,9 @@
                                         <a href="{% url 'dashboard' %}">
                                             <button class="ml-4 bg-[#E0E7FF] text-[#4F46E5] px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-200">Dashboard</button>
                                         </a>
+                                        <a href="{% url 'profile' %}">
+                                            <button class="ml-4 bg-[#E0E7FF] text-[#4F46E5] px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-200">Profile</button>
+                                        </a>
                                     <form action="{% url 'sign-out' %}" method="POST">
                                         {% csrf_token %}
                                         <button class="ml-4 bg-[#E0E7FF] text-[#4F46E5] px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-200">Sign Out</button>
@@ -87,6 +90,9 @@
                             <a href="{% url 'admin-dashboard' %}">
                                 <button class="bg-[#4F46E5] text-white px-3 py-2 mr-2 rounded-md text-sm font-medium hover:bg-indigo-700">Admin Dashboard</button>
                             </a>
+                            <a href="{% url 'profile' %}">
+                                            <button class="ml-4 bg-[#E0E7FF] text-[#4F46E5] px-3 py-2 rounded-md text-sm font-medium hover:bg-indigo-200">Profile</button>
+                                        </a>
                             <a href="{% url 'dashboard' %}">
                                 <button class="bg-[#4F46E5] text-white px-3 py-2 mr-2 rounded-md text-sm font-medium hover:bg-indigo-700">Admin Dashboard</button>
                             </a>

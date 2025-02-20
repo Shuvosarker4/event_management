@@ -25,3 +25,4 @@ class Event(models.Model):
     def get_upcoming_events():
         return Event.objects.filter(date__gte=timezone.now().date())
  
+ 
